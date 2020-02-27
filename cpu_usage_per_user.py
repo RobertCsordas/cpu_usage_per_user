@@ -52,6 +52,10 @@ for i in range(n_runs):
 
         usage_per_user[user] = usage_per_user.get(user, 0.0) + percent/ncpu/n_runs
 
+total = sum(usage_per_user.values())
+if total>100:
+    usage_per_user = {k: v/total*100.0 for k, v in usage_per_user.items()}
+
 # Print usages
 for user, usage in usage_per_user.items():
     if usage < 0.1:
